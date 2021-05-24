@@ -2,6 +2,10 @@ package main
 
 import "fmt"
 
+type bot interface {
+	getGreeting() string
+}
+
 type englishBot struct{}
 type spanishBot struct{}
 
@@ -10,21 +14,17 @@ func main() {
 	sb := spanishBot{}
 
 	printGreeting(eb)
-	//printGreeting(sb)
+	printGreeting(sb)
 }
 
-func printGreeting(eb englishBot) {
-	fmt.Println(eb.getGreeting())
+func printGreeting(b bot) {
+	fmt.Println(b.getGreeting())
 }
 
-func (eb englishBot) getGreeting() string {
+func (englishBot) getGreeting() string {
 	return "Hello!"
 }
 
-func printGreeting(sp spanishBot) {
-	fmt.Println(sp.getGreeting())
-}
-
-func (sb spanishBot) getGreeting() string {
+func (spanishBot) getGreeting() string {
 	return "Hola!"
 }
